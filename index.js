@@ -16,7 +16,16 @@ const limit = rateLimit({
   // ^ each user can make only 5 requests every 10 minutes
 })
 app.use(limit)
-app.set('tust proxy', 1)
+
+app.get('/', (req, res) => {
+  res.json('hello')
+})
+
+app.get('/getData', (req, res) => {
+	res.json('hello');
+});
+
+app.set('tust proxy', 1) // Need this to allow X-Forwarded-* header fields to be trusted.
 
 // Routes
 app.use('/weather', require('./routes/openWeatherMap'))
